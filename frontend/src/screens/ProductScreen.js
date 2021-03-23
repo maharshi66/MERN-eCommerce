@@ -6,6 +6,7 @@ import Rating from '../components/Rating';
 import {listProductDetails} from '../actions/productActions'
 import Loader from '../components/Loader';
 import Message from '../components/Message'
+import Meta from '../components/Meta'
 import {createProductReview} from '../actions/productActions'
 import { PRODUCT_CREATE_REVIEW_RESET } from '../constants/productConstants'
 
@@ -56,6 +57,7 @@ const ProductScreen = ({history, match}) => {
                     <Message variant='danger'>{error}</Message>
                 : (
                     <>
+                    <Meta title={product.name} />
                     <Row>
                     <Col md={6}>
                        <Image src={product.image} alt={product.name} fluid/>
@@ -141,12 +143,12 @@ const ProductScreen = ({history, match}) => {
                                 </ListGroup.Item>
                             ))}
                             <ListGroup.Item>
-                                <h2>Write a review</h2>
+                                <h4>Write a review</h4>
                                 {errorProductReview && <Message variant='danger'>{errorProductReview}</Message>}
                                 {userInfo 
                                    ? (
                                     <Form onSubmit={submitHandler}>
-                                        <Form.Group controlId={rating}>
+                                        <Form.Group controlId='rating'>
                                             <Form.Label>Rating</Form.Label>
                                              <Form.Control 
                                                 as='select'
@@ -175,7 +177,7 @@ const ProductScreen = ({history, match}) => {
                                     </Form>
                                     ) 
                                     : <Message>Please 
-                                        <Link to='/login'>sign in</Link>
+                                        <Link to='/login'> sign in </Link>
                                          to write a review
                                       </Message>}
                             </ListGroup.Item>                             

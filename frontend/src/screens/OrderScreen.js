@@ -64,7 +64,7 @@ const OrderScreen = ({match, history}) => {
               setSdkReady(true)
             }
           }
-        }, [dispatch, orderId, successPay,successDeliver, order])
+        }, [dispatch, orderId, successPay,successDeliver, order, userInfo])
 
     const successPaymentHandler = (paymentResult) => {
         console.log(paymentResult)
@@ -95,7 +95,7 @@ const OrderScreen = ({match, history}) => {
                                                 <Image src={item.image} alt={item.name} fluid rounded />
                                             </Col>
                                             <Col>
-                                                <Link to={`/product/${item.id}`}>
+                                                <Link to={`/product/${item.product}`}>
                                                     {item.name}
                                                 </Link>
                                             </Col>
