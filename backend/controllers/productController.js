@@ -6,9 +6,21 @@ import e from 'express'
 //@route GET /api/products
 //@access Public
 const getProducts = asyncHandler (async (req, res) => {
-    const products = await Product.find({})
-    // throw new Error('Some Random Error')
-    res.json(products)
+    //how many per page
+    const pageSize = 2
+    const page = Number(req.query.pageNumber) || 1
+    
+    const keyword = req.query.keyword 
+    ? {
+        name: {
+            $regex: req.query.keyword,
+            $options: 'i'
+        }
+    } : {}
+    
+    const count = await Product.countDocuments({...keyword})
+    const products = await Product.find({...keyword}).limit(pageSize).skip(pageSize * (page - 1))
+    res.json({products, page, pages: Math.ceil(count / pageSize)})
 })
 
 //@desc Fetch single product
