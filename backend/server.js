@@ -2,6 +2,7 @@
 import express from 'express'
 import dotenv from 'dotenv'
 import path from 'path'
+import morgan from 'morgan'
 import connectDB from './config/db.js'
 import colors from 'colors'
 import {notFound, errorHandler} from './middleware/errorMiddleware.js'
@@ -13,8 +14,14 @@ import uploadRoutes from './routes/uploadRoutes.js'
 dotenv.config()
 const app =  express();
 
+// Morgan for logging
+if(process.env.NODE_ENV == 'development'){
+    app.use(morgan('dev'))
+}
+
 //Required for Body Parsing
 app.use(express.json())
+
 
 connectDB()
 
