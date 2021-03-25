@@ -32,7 +32,7 @@ const ProductListScreen = ({history, match}) => {
             type: PRODUCT_CREATE_RESET
         })
 
-        if(!userInfo.isAdmin || !userInfo){
+        if(!userInfo || !userInfo.isAdmin){
             history.push('/login')
         }
         if(successCreate){
