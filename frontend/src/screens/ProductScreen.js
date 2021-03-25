@@ -74,7 +74,7 @@ const ProductScreen = ({history, match}) => {
                                Price: ${product.price}
                            </ListGroup.Item>
                            <ListGroup.Item>
-                               Description: Sample Text
+                               Description: {product.description}
                            </ListGroup.Item>
                        </ListGroup>
                     </Col>
